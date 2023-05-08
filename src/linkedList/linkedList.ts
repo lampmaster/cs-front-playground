@@ -3,10 +3,12 @@ import { LinkedListNode } from "./linkedListNode"
 export class LinkedList<T> {
     #first: LinkedListNode<T>
     #last: LinkedListNode<T>
+    #size: number
 
     constructor() {
         this.#first = null
         this.#last = null
+        this.#size = 0
     }
 
     addStart(value: T) {
@@ -18,6 +20,7 @@ export class LinkedList<T> {
             node.next = this.#first
         }
 
+        this.#size++
         this.#first = node
     }
 
@@ -30,7 +33,28 @@ export class LinkedList<T> {
             node.prev = this.#last
         }
         
+        this.#size++
         this.#last = node
+    }
+
+    removeFirst() {
+        if (this.#first !== null) {
+            const nodeToRemove = this.#first
+            this.#first = this.#first.next
+            this.#first.prev = null
+            nodeToRemove.next = null
+            this.#size--
+        }
+    }
+
+    removeLast() {
+        if (this.#last !== null) {
+            const nodeToRemove = this.#last
+            this.#last = this.#last.prev
+            this.#last.next = null
+            nodeToRemove.prev = null
+            this.#size--
+        }
     }
 
     get first() {
@@ -41,27 +65,12 @@ export class LinkedList<T> {
         return this.#last
     }
 
-    removeFirst() {
-        if (this.#first !== null) {
-            const nodeToRemove = this.#first
-            this.#first = this.#first.next
-            this.#first.prev = null
-            nodeToRemove.next = null
-        }
-    }
-
-    removeLast() {
-        if (this.#last !== null) {
-            const nodeToRemove = this.#last
-            this.#last = this.#last.prev
-            this.#last.next = null
-            nodeToRemove.prev = null
-            
-        }
+    get size() {
+        return this.#size
     }
 
     [Symbol.iterator]() {
-        let currentNode = this.first
+        let currentNode = this.#first
 
         return {
             next: () => {

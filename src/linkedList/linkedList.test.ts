@@ -5,6 +5,7 @@ describe('', () => {
         const list = createLinkedList()
         expect(list.first).toBe(null)
         expect(list.last).toBe(null)
+        expect(list.size).toBe(0)
     })
 
     it('first element === last element when there is only one element on addEnd', () => {
@@ -15,6 +16,7 @@ describe('', () => {
         expect(list.first.next).toBeNull()
         expect(list.last.prev).toBeNull()
         expect(list.first.next).toBe(list.last.prev)
+        expect(list.size).toBe(1)
     })
 
     it('first element === last element when there is only one element on on addStart', () => {
@@ -25,6 +27,7 @@ describe('', () => {
         expect(list.first.next).toBeNull()
         expect(list.last.prev).toBeNull()
         expect(list.first.next).toBe(list.last.prev)
+        expect(list.size).toBe(1)
     })
 
     it('add element to the start', () => {
@@ -38,6 +41,7 @@ describe('', () => {
         expect(list.last.prev.value).toBe(2)
         expect(list.first.prev).toBeNull()
         expect(list.last.next).toBeNull()
+        expect(list.size).toBe(3)
     })
 
     it('add elements to the end', () => {
@@ -51,6 +55,7 @@ describe('', () => {
         expect(list.last.prev.value).toBe(2)
         expect(list.first.prev).toBeNull()
         expect(list.last.next).toBeNull()
+        expect(list.size).toBe(3)
     })
 
     it('remove last element', () => {
@@ -59,7 +64,18 @@ describe('', () => {
         list.addEnd(2)
         list.addEnd(3)
         list.removeLast()
-        expect(1).toBe(1)
+        expect(list.last.value).toBe(2)
+        expect(list.size).toBe(2)
+    })
+
+    it('remove first element', () => {
+        const list = createLinkedList()
+        list.addEnd(1)
+        list.addEnd(2)
+        list.addEnd(3)
+        list.removeFirst()
+        expect(list.first.value).toBe(2)
+        expect(list.size).toBe(2)
     })
 
     it('check if the list is iterable', () => {
