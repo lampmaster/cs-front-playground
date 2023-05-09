@@ -1,8 +1,8 @@
 import { LinkedListNode } from "./linkedListNode"
 
 export class LinkedList<T> {
-    #first: LinkedListNode<T>
-    #last: LinkedListNode<T>
+    #first: LinkedListNode<T> | undefined
+    #last: LinkedListNode<T> | null
     #size: number
 
     constructor() {
@@ -40,8 +40,13 @@ export class LinkedList<T> {
     removeFirst() {
         if (this.#first !== null) {
             const nodeToRemove = this.#first
-            this.#first = this.#first.next
-            this.#first.prev = null
+            const newFirst = nodeToRemove.next
+            if (newFirst === null) {
+                this.#last = null
+            } else {
+                newFirst.prev = null
+            }
+            this.#first = newFirst
             nodeToRemove.next = null
             this.#size--
         }
@@ -50,14 +55,20 @@ export class LinkedList<T> {
     removeLast() {
         if (this.#last !== null) {
             const nodeToRemove = this.#last
-            this.#last = this.#last.prev
-            this.#last.next = null
+            const newLast = this.#last.prev
+            if (newLast === null) {
+                this.#first = null
+            } else {
+                newLast.next = null
+            }
+
+            this.#last = newLast
             nodeToRemove.prev = null
             this.#size--
         }
     }
 
-    get first() {
+    get first(): LinkedListNode<T> | null {
         return this.#first
     }
 

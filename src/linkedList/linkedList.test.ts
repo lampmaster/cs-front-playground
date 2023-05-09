@@ -68,6 +68,19 @@ describe('', () => {
         expect(list.size).toBe(2)
     })
 
+    it('remove all elements from end', () => {
+        const list = createLinkedList()
+        list.addEnd(1)
+        list.addEnd(2)
+        list.addEnd(3)
+        list.removeLast()
+        list.removeLast()
+        list.removeLast()
+        expect(list.last).toBeNull()
+        expect(list.first).toBeNull()
+        expect(list.size).toBe(0)
+    })
+
     it('remove first element', () => {
         const list = createLinkedList()
         list.addEnd(1)
@@ -76,6 +89,19 @@ describe('', () => {
         list.removeFirst()
         expect(list.first.value).toBe(2)
         expect(list.size).toBe(2)
+    })
+
+    it('remove all elements from end', () => {
+        const list = createLinkedList()
+        list.addEnd(1)
+        list.addEnd(2)
+        list.addEnd(3)
+        list.removeFirst()
+        list.removeFirst()
+        list.removeFirst()
+        expect(list.last).toBeNull()
+        expect(list.first).toBeNull()
+        expect(list.size).toBe(0)
     })
 
     it('check if the list is iterable', () => {
