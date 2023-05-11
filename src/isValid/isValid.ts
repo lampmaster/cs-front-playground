@@ -3,6 +3,7 @@ const bracketsMap = new Map([['[', ']'], ['{', '}'], ['(', ')']])
 
 export function isValid(string: string) {
     const stack = []
+    const isStackEmpty = () => stack.length === 0
 
     for (const char of string) {
         switch(char) {
@@ -11,12 +12,13 @@ export function isValid(string: string) {
             case '(':
                 stack.push(char)
                 break
-        }
-
-        switch(char) {
             case ']':
             case '}':
             case ')':
+                if (isStackEmpty()) {
+                    return false
+                }
+
                 const frontBracket = stack.pop()
                 
                 if (bracketsMap.get(frontBracket) !== char) {
@@ -25,6 +27,6 @@ export function isValid(string: string) {
         }
     }
 
-    return stack.length === 0
+    return isStackEmpty()
 
 }
