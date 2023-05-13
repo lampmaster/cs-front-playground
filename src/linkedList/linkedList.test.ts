@@ -81,6 +81,19 @@ describe('', () => {
         expect(list.size).toBe(0)
     })
 
+    it("Don't do anything on remove element from end when the list is empty", () => {
+        const list = createLinkedList()
+        expect(list.last).toBeNull()
+        expect(list.first).toBeNull()
+        expect(list.size).toBe(0)
+        list.removeLast()
+        list.removeLast()
+        list.removeLast()
+        expect(list.last).toBeNull()
+        expect(list.first).toBeNull()
+        expect(list.size).toBe(0)
+    })
+
     it('remove first element', () => {
         const list = createLinkedList()
         list.addEnd(1)
@@ -91,11 +104,24 @@ describe('', () => {
         expect(list.size).toBe(2)
     })
 
-    it('remove all elements from end', () => {
+    it('remove all elements from start', () => {
         const list = createLinkedList()
         list.addEnd(1)
         list.addEnd(2)
         list.addEnd(3)
+        list.removeFirst()
+        list.removeFirst()
+        list.removeFirst()
+        expect(list.last).toBeNull()
+        expect(list.first).toBeNull()
+        expect(list.size).toBe(0)
+    })
+
+    it("Don't do anything on remove element from start when the list is empty", () => {
+        const list = createLinkedList()
+        expect(list.last).toBeNull()
+        expect(list.first).toBeNull()
+        expect(list.size).toBe(0)
         list.removeFirst()
         list.removeFirst()
         list.removeFirst()
