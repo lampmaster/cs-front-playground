@@ -28,5 +28,4 @@ export function isValid(string: string) {
     }
 
     return isStackEmpty()
-
 }
