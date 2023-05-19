@@ -130,6 +130,42 @@ describe('', () => {
         expect(list.size).toBe(0)
     })
 
+    describe('Remove any elemnt', () => {
+        it('Remove element when linked list is empty', () => {
+            const list = createLinkedList()
+            expect(list.delete((value) => value === 1)).toBeNull()
+        })
+
+        it('Remove element when linked list has one element', () => {
+            const list = createLinkedList()
+            list.addEnd(1)
+            expect(list.delete((value) => value === 1)).toBe(1)
+        })
+
+        it('Remove element when linked list has two elements', () => {
+            const list = createLinkedList()
+            list.addEnd(1)
+            list.addEnd(2)
+            expect(list.delete((value) => value === 2)).toBe(2)
+        })
+
+        it('Remove element when linked list has more than two elements', () => {
+            const list = createLinkedList()
+            list.addEnd(1)
+            list.addEnd(2)
+            list.addEnd(4)
+            list.addEnd(3)
+            expect(list.delete((value) => value === 2)).toBe(2)
+        })
+
+        it('Remove not existed element when linked list has several elements', () => {
+            const list = createLinkedList()
+            list.addEnd(1)
+            list.addEnd(2)
+            expect(list.delete((value) => value === 3)).toBeNull()
+        })
+    })
+
     it('check if the list is iterable', () => {
         const list = createLinkedList()
         list.addEnd(1)
@@ -141,5 +177,17 @@ describe('', () => {
         expect(listIterator.next()).toEqual({value: 2, done: false})
         expect(listIterator.next()).toEqual({value: 3, done: false})
         expect(listIterator.next()).toEqual({done: true})
+    }) 
+
+    it('should find node', () => {
+        const list = createLinkedList()
+        list.addEnd(1)
+        list.addEnd(2)
+        list.addEnd(10)
+        
+        expect(list.find(value => value === 1)).toBe(1)
+        expect(list.find(value => value === 2)).toBe(2)
+        expect(list.find(value => value === 10)).toBe(10)
+        expect(list.find(value => value === 3)).toBeNull()
     }) 
 })
