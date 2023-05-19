@@ -49,7 +49,11 @@ export class LinkedList<T> {
             this.#first = newFirst
             nodeToRemove.next = null
             this.#size--
+
+            return nodeToRemove
         }
+        
+        return null
     }
 
     removeLast() {
@@ -65,14 +69,71 @@ export class LinkedList<T> {
             this.#last = newLast
             nodeToRemove.prev = null
             this.#size--
+
+            return nodeToRemove
         }
+
+        return null
+    }
+
+    find(fn: (value: T) => boolean): null | T {
+        const linkedListNode = this.#find(fn)
+
+        if (linkedListNode !== null) {
+            return linkedListNode.value
+        }
+
+        return null
+    }
+
+    delete(fn: (value: T) => boolean): T | null {
+        const currentNode = this.#find(fn)
+
+        if (currentNode === null) {
+            return null
+        }
+
+        if (currentNode === this.#first) {
+            this.removeFirst()
+        } else if (currentNode === this.#last) {
+            this.removeLast()
+        } else {
+            const prevNode = currentNode.prev
+            const nextNode = currentNode.next
+    
+            prevNode.next = nextNode
+            nextNode.prev = prevNode
+        }
+
+        return currentNode.value
+    }
+
+    #find(fn: (value: T) => boolean): null | LinkedListNode<T> {
+        let currentNode = this.#first
+        let isFind = false
+        
+        while (currentNode !== null) {
+            isFind = fn(currentNode.value)
+
+            if (isFind) {
+                break
+            }
+            
+            currentNode = currentNode.next
+        }
+
+        if (currentNode != null) {
+            return currentNode
+        }
+
+        return null
     }
 
     get first(): LinkedListNode<T> | null {
         return this.#first
     }
 
-    get last() {
+    get last(): LinkedListNode<T> | null {
         return this.#last
     }
 
