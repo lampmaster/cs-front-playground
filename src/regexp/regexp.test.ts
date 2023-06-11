@@ -1,4 +1,6 @@
+import { calc } from "./calc"
 import { format } from "./format"
+
 
 it('Only latin letters, digits, "_" and "$"', () => {
     const regExp = /^[A-z\d$]+$/
@@ -24,4 +26,25 @@ describe('Testing format', () => {
         const result = format('Hello, ${user}! Your age is ${age}.', { age: 10})
         expect(result).toBe('Hello, ${user}! Your age is 10.')
     })
+})
+
+it('Testing calc', () => {
+    const example = calc(
+        `
+        some text 1 + 2 asdf
+        (1 * 2) + 2 - 5
+        expression in the end 1 + 2 - (-1 * 2)
+        ((1+2) + 1 * 2)
+        `
+        )
+
+    const result = 
+    `
+        some text 3asdf
+        -1
+        expression in the end 5
+        5
+        `
+    expect(example).toBe(result)
+
 })
