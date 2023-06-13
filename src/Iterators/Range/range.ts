@@ -3,7 +3,7 @@ export class Range<T> {
     #max: number
     #type: 'string' | 'number'
     #index = 0
-    #direction
+    #direction: number
 
     constructor(min: number | string, max: number | string) {
         if (typeof min !== typeof max) {
