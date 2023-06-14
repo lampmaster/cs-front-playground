@@ -1,4 +1,4 @@
-import { Range } from "./Range"
+import { Range } from "./range"
 
 describe('Testing Range', () => {
     it('Shuld return positive iterable range of numbers', () => {

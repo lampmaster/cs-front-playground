@@ -1,4 +1,4 @@
-export function filter<T>(iterable: Iterable<T>, cb: (value: T, index?: number, arr?: Iterable<T>) => boolean): IterableIterator<T> {
+export function filter<T>(iterable: Iterable<T>, cb: (value?: T, index?: number, arr?: Iterable<T>) => boolean): IterableIterator<T> {
     const iterator = iterable[Symbol.iterator]()
 
     return {
