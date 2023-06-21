@@ -1,4 +1,4 @@
-import { TypedArray, TypedArrayConstructor } from "../types";
+import { TypedArray, TypedArrayConstructor } from "../type";
 
 // current implementation works only with numbers
 export class Stack<T> {

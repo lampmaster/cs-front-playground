@@ -1,4 +1,4 @@
-import { TypedArray, TypedArrayConstructor } from "../types";
+import { TypedArray, TypedArrayConstructor } from "../type";
 
 type VectorOptions = {
     copacity: number

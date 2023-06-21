@@ -13,3 +13,6 @@ export type TypedArrayConstructor =
     | Int8ArrayConstructor
     | Int16ArrayConstructor
     | Int32ArrayConstructor
+
+
+export type PredicatFunction<T> = (value?: T, index?: number, arr?: Iterable<T>) => boolean
